@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Everton Vieira — Analista de Dados | Analytics Engineer</title>
-  <meta name="description" content="Portfólio de Everton Vieira, Analista de Dados e Analytics Engineer em Penedo, Alagoas: SQL, Python e IA generativa. Projetos, experiência e contato.">
+  <meta name="description" content="Portfólio de Everton Vieira, Analista de Dados e Analytics Engineer em Penedo, Alagoas: SQL, Python e IA generativa. Sobre mim, projetos, experiência e contato.">
   <link rel="canonical" href="https://vertonds.github.io/">
   <meta name="theme-color" content="#0D1117" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
@@ -23,15 +23,18 @@
 
   <link rel="preload" href="fonts/RedditSans.woff" as="font" type="font/woff" crossorigin>
   <link rel="stylesheet" href="styles.css">
+  <script src="js/churn-dados.js" defer></script>
+  <script src="js/site.js" defer></script>
 </head>
 <body>
 
-<a class="pular" href="#projetos">Pular para os projetos</a>
+<a class="pular" href="#sobre">Pular para o conteúdo</a>
 
 <header class="topo">
   <nav class="container nav" aria-label="Seções da página">
     <a class="marca" href="#inicio">Everton Vieira</a>
     <ul>
+      <li><a href="#sobre">Sobre</a></li>
       <li><a href="#projetos">Projetos</a></li>
       <li><a href="#experiencia">Experiência</a></li>
       <li><a href="#habilidades">Habilidades</a></li>
@@ -44,47 +47,93 @@
 <main id="inicio">
 
   <!-- ===== Apresentação ===== -->
-  <section class="hero container" aria-labelledby="nome">
-    <div class="hero-texto">
-      <p class="eyebrow">Penedo, Alagoas · Brasil</p>
-      <h1 id="nome">Everton Vieira</h1>
-      <p class="titulo">Analista de Dados <span aria-hidden="true">|</span> Analytics Engineer<br>
-        <span class="titulo-stack">SQL • Python • IA Generativa</span></p>
-      <p class="lead">Transformo dados de ERP em métricas que a diretoria confia. Num provedor de internet,
-        construí do zero o sistema de BI usado pela gestão e hoje me especializo em Analytics Engineering:
-        modelagem em camadas, SQL e Python, com IA generativa no dia a dia.</p>
-      <div class="acoes">
-        <a class="botao primario" href="https://github.com/vertonds" target="_blank" rel="noopener">
-          <svg aria-hidden="true" viewBox="0 0 16 16" width="18" height="18"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-          GitHub</a>
-        <a class="botao" href="https://www.linkedin.com/in/everton-vieira-872673228/" target="_blank" rel="noopener">
-          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
-          LinkedIn</a>
-        <a class="botao" href="mailto:evertonvieira72@gmail.com">
-          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg>
-          E-mail</a>
+  <section class="hero-fundo" aria-labelledby="nome">
+    <div class="hero container">
+      <div class="hero-texto">
+        <p class="eyebrow">Penedo, Alagoas · Brasil</p>
+        <h1 id="nome">Everton Vieira</h1>
+        <p class="titulo">Analista de Dados <span aria-hidden="true">|</span> Analytics Engineer<br>
+          <span class="titulo-stack">SQL • Python • IA Generativa</span></p>
+        <p class="so-impressao">vertonds.github.io · github.com/vertonds · linkedin.com/in/everton-vieira-872673228 · evertonvieira72@gmail.com</p>
+        <p class="lead">Transformo dados de ERP em métricas que a diretoria confia. Num provedor de internet,
+          construí do zero o sistema de BI usado pela gestão e hoje me especializo em Analytics Engineering:
+          modelagem em camadas, SQL e Python, com IA generativa no dia a dia.</p>
+        <div class="acoes">
+          <a class="botao primario" href="https://github.com/vertonds" target="_blank" rel="noopener">
+            <svg aria-hidden="true" viewBox="0 0 16 16" width="18" height="18"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub</a>
+          <a class="botao" href="https://www.linkedin.com/in/everton-vieira-872673228/" target="_blank" rel="noopener">
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+            LinkedIn</a>
+          <a class="botao" href="mailto:evertonvieira72@gmail.com">
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg>
+            E-mail</a>
+          <a class="botao" href="curriculo-everton-vieira.pdf" download>
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+            Currículo (PDF)</a>
+        </div>
       </div>
+      <img class="foto" src="img/foto.jpg" alt="Foto de Everton Vieira" width="200" height="200">
     </div>
-    <img class="foto" src="img/foto.jpg" alt="Foto de Everton Vieira" width="200" height="200">
+  </section>
+
+  <!-- ===== Sobre mim ===== -->
+  <section id="sobre" class="secao container reveal" aria-labelledby="t-sobre">
+    <div class="sobre">
+      <div class="sobre-texto">
+        <h2 id="t-sobre">Sobre mim</h2>
+        <p>Sou Analista de TI &amp; Dados na Prestek Telecom, um provedor de internet, onde criei do zero a estrutura
+          de BI da empresa: seis setores analíticos, uma fonte única da verdade e as definições oficiais de churn,
+          LTV e inadimplência, que antes variavam de setor para setor. O diretor pediu o sistema, e era a primeira
+          vez que eu fazia algo assim. Além da parte técnica (SQL, Python, APIs e modelagem de dados), atuo na
+          camada estratégica: propus a análise de causa dos cancelamentos, que cruza chamados técnicos com a
+          localização dos clientes, e lidero a estruturação da nova área de Gestão de Produto. As duas estão em
+          fase inicial.</p>
+        <p>Minha trajetória une a formação técnica, em Ciência de Dados (EBAC) e Engenharia de Computação
+          (Descomplica, cursada até 2025), com o pensamento crítico, investigativo e didático da Licenciatura em
+          História (Estácio). Antes da tecnologia, passei pela gestão pública: entre 2021 e 2023, numa unidade de
+          saúde da Prefeitura de Penedo, cuidei dos sistemas do SUS e dos relatórios mensais de indicadores para a
+          Secretaria de Saúde, e aprendi na prática o peso da integridade do dado na ponta: registro errado virava
+          insumo faltando. Depois veio o desenvolvimento web, num estágio de front-end na Mundiware. Essa bagagem
+          me permite transitar entre a engenharia e a diretoria, traduzindo dados complexos em decisões práticas.</p>
+        <p>Busco oportunidades 100% remotas como Analista de Dados ou Analytics Engineer, para resolver problemas
+          de escala: arquitetura de pipelines, retenção de clientes, LTV e modelagem de dados em empresas que
+          decidem com dados.</p>
+      </div>
+      <ol class="marcos" aria-label="Marcos">
+        <li><span class="marco-ano">2021</span><span>Saúde pública: relatórios e sistemas do SUS</span></li>
+        <li><span class="marco-ano">2022</span><span>Ciência de Dados (EBAC)</span></li>
+        <li><span class="marco-ano">2024</span><span>Estágio front-end</span></li>
+        <li><span class="marco-ano">2026</span><span>Analista de TI &amp; Dados: BI para a diretoria</span></li>
+      </ol>
+    </div>
   </section>
 
   <!-- ===== Projetos ===== -->
-  <section id="projetos" class="secao container" aria-labelledby="t-projetos">
+  <section id="projetos" class="secao container reveal" aria-labelledby="t-projetos">
     <div class="secao-cab">
       <h2 id="t-projetos">Projetos</h2>
       <p>Só entra aqui o que tem código público para mostrar.</p>
     </div>
 
     <article class="destaque">
-      <a class="destaque-capa" href="https://github.com/vertonds/isp-analytics" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
-        <img src="img/capa-isp-analytics.png" alt="" width="1300" height="598" loading="lazy">
-      </a>
+      <figure class="grafico" id="grafico-churn">
+        <img src="img/capa-isp-analytics.png" alt="Gráfico de linhas: churn mensal por filial nos últimos 24 meses, com o total em torno de 1,3% ao mês" width="1300" height="598" loading="lazy">
+        <figcaption>Churn mensal por filial: perdas de cliente ÷ ativos no início do mês, últimos 24 meses.
+          Saída da tabela <code>spec_churn_mensal</code> do projeto. Passe o mouse ou use as setas do teclado para ler cada mês.</figcaption>
+      </figure>
       <div class="destaque-corpo">
         <p class="kicker">Estudo de caso · Analytics Engineering</p>
         <h3>ISP Analytics</h3>
         <p>Um provedor de internet vive de três números: quantos clientes entram, quantos saem e quem está
           pagando. Cada setor chegava a um valor diferente para o mesmo indicador. O ISP Analytics mostra como organizar
           o dado para que cada métrica tenha <strong>uma definição só, escrita uma vez e conferida a cada carga</strong>.</p>
+        <ul class="tiles" aria-label="Números do projeto">
+          <li><strong>7.920</strong><span>clientes fictícios</span></li>
+          <li><strong>186.726</strong><span>faturas</span></li>
+          <li><strong>33</strong><span>meses de série</span></li>
+          <li><strong>9</strong><span>testes e portas</span></li>
+        </ul>
         <ul class="marcas">
           <li>Camadas <strong>Stage → SOR → SOT → SPEC</strong> em SQLite; SOT e SPEC escritos só em SQL (CTEs e funções de janela).</li>
           <li>Churn, inadimplência por faixa de atraso, LTV e safra, cada um com coluna de valor, filtro de status e data de corte declarados.</li>
@@ -93,7 +142,6 @@
         <ul class="tags" aria-label="Tecnologias">
           <li>SQL</li><li>Python</li><li>SQLite</li><li>pandas</li><li>NumPy</li><li>GitHub Actions</li>
         </ul>
-        <p class="fatos">7.920 clientes · 186.726 faturas · 33 meses · 9 testes · dados 100% sintéticos</p>
         <div class="acoes">
           <a class="botao primario" href="https://github.com/vertonds/isp-analytics" target="_blank" rel="noopener">Ver código no GitHub</a>
           <a class="botao" href="https://github.com/vertonds/isp-analytics/blob/main/docs/RESULTADOS.md" target="_blank" rel="noopener">Ver resultados</a>
@@ -103,7 +151,7 @@
   </section>
 
   <!-- ===== Experiência ===== -->
-  <section id="experiencia" class="secao container" aria-labelledby="t-exp">
+  <section id="experiencia" class="secao container reveal" aria-labelledby="t-exp">
     <div class="secao-cab">
       <h2 id="t-exp">Experiência</h2>
       <p>Do suporte de TI e operação para dados: a trajetória que explica o jeito de trabalhar.</p>
@@ -116,21 +164,25 @@
           <h3>Prestek Telecom <span class="sep">·</span> Analista de TI &amp; Dados</h3>
           <p class="onde">Provedor regional de internet · Penedo-AL · tempo integral, presencial</p>
           <ul class="marcas">
-            <li>Desenvolvi do zero o <strong>sistema de BI interno</strong> usado pela diretoria (Node.js + SQL, Python na etapa analítica), com dashboards por setor: comercial, cobrança, financeiro, operação, auditoria e visão geral.</li>
-            <li>Defini e documentei as métricas de <strong>churn, inadimplência e LTV</strong> junto às áreas de negócio.</li>
-            <li>Coordenei o lançamento de Prestek Play, Vince Chat e Qonex Hub com fornecedores externos.</li>
-            <li>Liderança técnica na descontinuação do sistema legado (Synapz) em SAC, Comercial e Financeiro.</li>
-            <li>Treinamentos, gestão de acessos e suporte à infraestrutura.</li>
+            <li>Desenvolvi do zero o <strong>sistema de BI interno</strong> usado pela diretoria (Node.js + SQL, Python na etapa analítica): APIs para extração de métricas do ERP, automação de rotinas e dashboards por setor: comercial, cobrança, financeiro, operação, auditoria e visão geral.</li>
+            <li>Defini e documentei as métricas de <strong>churn, inadimplência e LTV</strong> junto às áreas de negócio, para que todos os setores usassem a mesma definição.</li>
+            <li>Lidero a estruturação de uma <strong>nova área de Gestão de Produto</strong>, inédita na empresa: desenho do mapa de produtos e do perfil de competências da função, que vai cuidar de precificação, pesquisa de mercado, treinamento das equipes e da ponte entre setores e parceiros externos. <em>Em fase inicial.</em></li>
+            <li>Propus e conduzo uma <strong>análise de causa dos cancelamentos</strong>: cruzar os chamados de "sem acesso" e "internet lenta" com a localização dos clientes, até o nível de bairro e rua, para mostrar às equipes técnicas onde agir primeiro. <em>Em fase inicial.</em></li>
+            <li>Coordenei o lançamento de três aplicações (Prestek Play, Vince Chat e Qonex Hub) com fornecedores externos, alinhando prazos com as equipes internas.</li>
+            <li>Liderança técnica na descontinuação do sistema legado (Synapz) em SAC, Comercial e Financeiro, sem parada da operação.</li>
+            <li>Treinamentos para adoção das novas ferramentas, gestão de acessos e suporte à infraestrutura.</li>
           </ul>
         </div>
       </li>
       <li>
         <div class="quando">ago – dez/2024</div>
         <div class="oque">
-          <h3>Mundiware <span class="sep">·</span> Estágio em Desenvolvimento Front-End</h3>
-          <p class="onde">Remoto</p>
+          <h3>Mundiware <span class="sep">·</span> Desenvolvedor front-end (estágio)</h3>
+          <p class="onde">Remoto · JavaScript, HTML e CSS</p>
           <ul class="marcas">
-            <li>Interfaces, SEO e manutenção de código.</li>
+            <li>Criação e manutenção de interfaces web responsivas.</li>
+            <li>SEO técnico e tempo de carregamento: estrutura do código e otimização de performance.</li>
+            <li>Manutenção corretiva e evolutiva de código legado, com correção de falhas.</li>
           </ul>
         </div>
       </li>
@@ -138,21 +190,27 @@
         <div class="quando">nov/2023 – nov/2025</div>
         <div class="oque">
           <h3>Rose Presentes <span class="sep">·</span> Lojista (meio período)</h3>
-          <p class="onde">Estoque, inventário, entregas e atendimento.</p>
+          <p class="onde">Recebimento e conferência de mercadorias, inventário e contagens cíclicas, reposição e entregas ao cliente.</p>
         </div>
       </li>
-      <li class="compacto">
+      <li>
         <div class="quando">ago/2021 – set/2023</div>
         <div class="oque">
-          <h3>Prefeitura de Penedo <span class="sep">·</span> Agente Administrativo</h3>
-          <p class="onde">Unidade de saúde: agenda médica, sistemas do SUS, relatórios mensais à Secretaria e orientação da equipe.</p>
+          <h3>Prefeitura Municipal de Penedo <span class="sep">·</span> Agente Administrativo</h3>
+          <p class="onde">Unidade de saúde · tempo integral · Penedo-AL</p>
+          <ul class="marcas">
+            <li><strong>Relatórios mensais de indicadores de atendimento</strong> para a Secretaria de Saúde, usados como base para as requisições de recursos e insumos da unidade.</li>
+            <li>Operação dos sistemas de informação do SUS, garantindo a precisão dos registros.</li>
+            <li>Organização das agendas médicas e de enfermagem, roteamento de exames e consultas especializadas, controle de estoque da farmácia e do almoxarifado.</li>
+            <li>Orientação técnica da equipe de atendimento e ponto de contato entre a unidade, a Secretaria e a comunidade.</li>
+          </ul>
         </div>
       </li>
     </ol>
   </section>
 
   <!-- ===== Habilidades ===== -->
-  <section id="habilidades" class="secao container" aria-labelledby="t-hab">
+  <section id="habilidades" class="secao container reveal" aria-labelledby="t-hab">
     <div class="secao-cab">
       <h2 id="t-hab">Habilidades</h2>
       <p>Agrupadas pelo que cada uma tem de prova: projeto público ou experiência.</p>
@@ -181,7 +239,7 @@
       </div>
       <div class="grupo">
         <h3>Gestão e processo</h3>
-        <ul class="tags"><li>Coordenação com fornecedores</li><li>Descontinuação de legado</li><li>Treinamentos</li><li>Gestão de acessos</li></ul>
+        <ul class="tags"><li>Visão de negócio</li><li>Gestão de produto</li><li>Coordenação com fornecedores</li><li>Descontinuação de legado</li><li>Treinamentos</li><li>Gestão de acessos</li></ul>
       </div>
       <div class="grupo">
         <h3>Idiomas</h3>
@@ -191,12 +249,12 @@
   </section>
 
   <!-- ===== Formação ===== -->
-  <section id="formacao" class="secao container" aria-labelledby="t-form">
+  <section id="formacao" class="secao container reveal" aria-labelledby="t-form">
     <div class="secao-cab">
       <h2 id="t-form">Formação e certificados</h2>
     </div>
 
-    <div class="tabela-rolagem">
+    <div class="tabela-rolagem" role="region" tabindex="0" aria-label="Tabela de formação, rolável na horizontal em telas estreitas">
       <table>
         <thead><tr><th>Curso</th><th>Instituição</th><th>Período</th><th>Situação</th></tr></thead>
         <tbody>
@@ -206,15 +264,23 @@
         </tbody>
       </table>
     </div>
-    <p class="certificados"><strong>Certificados Descomplica:</strong> Programming and Communication (ago/2023) ·
-      Modelling Data Developer (mar/2024) · Developer Thinking (mai/2024) · User Experience (set/2024) ·
-      Math Computing Basics.</p>
+
+    <h3 class="sub">Certificados Descomplica</h3>
+    <!-- Ordem e datas conferidas com o LinkedIn em 28/10/2026 (mais recente primeiro). Os links de verificação da
+         Descomplica estavam devolvendo 404 nessa data; quando voltarem, acrescentar <a href="URL" target="_blank" rel="noopener">Verificar</a> em cada item. -->
+    <ul class="certificados-lista">
+      <li><span>User Experience</span><span class="quando">set/2024</span></li>
+      <li><span>Developer Thinking</span><span class="quando">mai/2024</span></li>
+      <li><span>Modelling Data Developer</span><span class="quando">mar/2024</span></li>
+      <li><span>Math Computing Basics</span><span class="quando">ago/2023</span></li>
+      <li><span>Programming and Communication</span><span class="quando">ago/2023</span></li>
+    </ul>
   </section>
 
   <!-- ===== Contato ===== -->
-  <section id="contato" class="secao container contato" aria-labelledby="t-contato">
+  <section id="contato" class="secao container contato reveal" aria-labelledby="t-contato">
     <h2 id="t-contato">Vamos conversar?</h2>
-    <p>Vagas de dados, BI e analytics engineering: remoto, Aracaju ou João Pessoa. Respondo por e-mail ou LinkedIn.</p>
+    <p>Vagas remotas de Analista de Dados ou Analytics Engineer. Respondo por e-mail ou LinkedIn.</p>
     <div class="acoes centro">
       <a class="botao primario" href="mailto:evertonvieira72@gmail.com">evertonvieira72@gmail.com</a>
       <a class="botao" href="https://www.linkedin.com/in/everton-vieira-872673228/" target="_blank" rel="noopener">LinkedIn</a>
@@ -226,7 +292,7 @@
 
 <footer class="rodape">
   <div class="container">
-    <p>© 2026 Everton Vieira · HTML e CSS puros, sem framework ·
+    <p>© 2026 Everton Vieira · HTML, CSS e JavaScript puros, sem framework ·
       <a href="https://github.com/vertonds/vertonds.github.io" target="_blank" rel="noopener">código deste site</a></p>
   </div>
 </footer>

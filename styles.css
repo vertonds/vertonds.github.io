@@ -1,6 +1,6 @@
 /* ==========================================================================
-   vertonds.github.io — folha de estilo única
-   Tokens (cores, tipografia) → base → componentes → seções → responsivo
+   vertonds.github.io — folha de estilo única (v2, direção "Painel")
+   Tokens → base → componentes → seções → gráfico → responsivo → impressão
    ========================================================================== */
 
 @font-face {
@@ -25,9 +25,14 @@
   --destaque-suave: rgba(47, 129, 247, 0.14);
   --ok: #3FB950;
   --pendente: #D29922;
+  --ponto: rgba(155, 167, 180, 0.22);          /* grade de pontos do topo */
   --sombra: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
   --raio: 12px;
   --fonte: "Reddit Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+  /* séries do gráfico: paleta categórica validada (modo escuro) */
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181;
+  --grafico-superficie: #161B22;
   color-scheme: dark;
 }
 
@@ -45,7 +50,10 @@
     --destaque-suave: rgba(9, 105, 218, 0.10);
     --ok: #1A7F37;
     --pendente: #9A6700;
+    --ponto: rgba(89, 99, 110, 0.22);
     --sombra: 0 1px 2px rgba(31, 35, 40, 0.08), 0 8px 24px rgba(31, 35, 40, 0.10);
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4;
+    --grafico-superficie: #FCFCFB;
     color-scheme: light;
   }
 }
@@ -70,15 +78,19 @@ h1, h2, h3 { line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
 h1 { font-size: clamp(2.25rem, 6vw, 3.5rem); font-weight: 800; }
 h2 { font-size: clamp(1.6rem, 3.2vw, 2.1rem); font-weight: 700; }
 h3 { font-size: 1.2rem; font-weight: 700; }
+h3.sub { font-size: 1rem; margin: 1.5rem 0 0.6rem; }
 p { margin: 0 0 1rem; }
 a { color: var(--destaque); text-underline-offset: 3px; }
 a:hover { text-decoration-thickness: 2px; }
 img { max-width: 100%; height: auto; display: block; }
 ul, ol { margin: 0; padding: 0; }
+code { font-family: var(--mono); font-size: 0.9em; background: var(--superficie-2); padding: 0.05em 0.35em; border-radius: 4px; }
 
 :focus-visible { outline: 3px solid var(--destaque); outline-offset: 3px; border-radius: 4px; }
 
 .container { width: min(1080px, 100% - 2rem); margin-inline: auto; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Link "pular para o conteúdo": invisível até receber foco pelo teclado */
 .pular {
@@ -139,18 +151,37 @@ ul, ol { margin: 0; padding: 0; }
   border-radius: 6px; padding: 0 0.35rem; font-weight: 600; font-size: 0.9em;
 }
 
+/* rótulos pequenos em monoespaçada: o ar de ferramenta técnica, sem carregar fonte */
+.eyebrow, .kicker, .quando, .marco-ano, .grafico-eixo, .tiles span, .nota {
+  font-family: var(--mono);
+}
 .eyebrow, .kicker {
-  margin: 0 0 0.6rem; font-size: 0.8rem; font-weight: 700;
+  margin: 0 0 0.6rem; font-size: 0.78rem; font-weight: 600;
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--texto-2);
 }
 .kicker { color: var(--destaque); }
+
+/* ---------- Entrada suave ao rolar (só com JavaScript e sem reduced-motion) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal { opacity: 0; transform: translateY(10px); transition: opacity 400ms ease, transform 400ms ease; }
+  .js .reveal.visivel { opacity: 1; transform: none; }
+}
 
 /* ---------- Seções ---------- */
 .secao { padding-block: 3.5rem; border-top: 1px solid var(--borda); }
 .secao-cab { margin-bottom: 1.75rem; max-width: 70ch; }
 .secao-cab p { color: var(--texto-2); margin: 0.4rem 0 0; }
 
-/* Apresentação */
+/* Apresentação: grade de pontos que some para baixo */
+.hero-fundo { position: relative; }
+.hero-fundo::before {                       /* a grade de pontos fica num pseudo-elemento: a máscara some só com ela, não com o texto */
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(var(--ponto) 1.2px, transparent 1.3px);
+  background-size: 22px 22px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+}
+.hero-fundo > .hero { position: relative; z-index: 1; }
 .hero {
   display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2.5rem;
   padding-block: 4.5rem 3.5rem;
@@ -164,6 +195,19 @@ ul, ol { margin: 0; padding: 0; }
   border: 3px solid var(--borda); box-shadow: var(--sombra);
 }
 
+/* Sobre mim: título grande, texto corrido, marcos ao lado */
+.sobre { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 3rem; align-items: start; }
+.sobre-texto h2 { margin-bottom: 1rem; }
+.sobre-texto p { max-width: 68ch; font-size: 1.0625rem; }
+.marcos { list-style: none; display: grid; gap: 0; border-left: 2px solid var(--borda); margin-top: 0.5rem; }
+.marcos li { position: relative; padding: 0.3rem 0 1.1rem 1.25rem; display: grid; gap: 0.1rem; }
+.marcos li::before {
+  content: ""; position: absolute; left: -7px; top: 0.6rem; width: 12px; height: 12px;
+  border-radius: 50%; background: var(--destaque); box-shadow: 0 0 0 4px var(--destaque-suave);
+}
+.marco-ano { font-size: 0.8rem; color: var(--texto-2); letter-spacing: 0.06em; }
+.marcos li span:last-child { font-size: 0.95rem; }
+
 /* Projeto em destaque */
 .destaque {
   display: grid; grid-template-columns: 1fr; overflow: hidden;
@@ -172,12 +216,49 @@ ul, ol { margin: 0; padding: 0; }
   transition: border-color 150ms ease;
 }
 .destaque:hover { border-color: var(--destaque); }
-.destaque-capa { display: block; background: #fcfcfb; border-bottom: 1px solid var(--borda); padding: 1rem 1.25rem; }
-.destaque-capa img { width: 100%; height: auto; }
 .destaque-corpo { padding: 1.75rem; }
 .destaque-corpo h3 { font-size: 1.45rem; margin-bottom: 0.75rem; }
 .destaque-corpo .marcas { margin: 1rem 0; }
-.fatos { color: var(--texto-2); font-size: 0.9rem; margin: 0.9rem 0 0; }
+
+.tiles { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin: 1.25rem 0; }
+.tiles li {
+  background: var(--superficie-2); border: 1px solid var(--borda); border-radius: 10px;
+  padding: 0.75rem 0.9rem; display: grid; gap: 0.1rem;
+}
+.tiles strong { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+.tiles span { font-size: 0.78rem; color: var(--texto-2); }
+
+/* ---------- Gráfico ---------- */
+.grafico { margin: 0; padding: 1rem 1.25rem 0.75rem; background: var(--grafico-superficie); border-bottom: 1px solid var(--borda); }
+.grafico img { width: 100%; height: auto; }
+.grafico figcaption { font-size: 0.86rem; color: var(--texto-2); margin-top: 0.6rem; }
+.grafico-caixa { position: relative; }
+.grafico-svg { width: 100%; height: auto; display: block; touch-action: pan-y; }
+.grafico-svg:focus-visible { outline-offset: 0; }
+.grafico-grade { stroke: var(--borda); stroke-width: 1; }
+.grafico-eixo { fill: var(--texto-2); font-size: 12px; }
+.grafico-rotulo { fill: var(--texto-2); font-size: 12px; font-family: var(--fonte); }
+.grafico-rotulo.total { fill: var(--texto); font-weight: 700; }
+.grafico-cruz { stroke: var(--texto-2); stroke-width: 1; stroke-dasharray: 3 3; pointer-events: none; }
+.grafico-marca { stroke: var(--grafico-superficie); stroke-width: 2; pointer-events: none; }
+.grafico-alvo { cursor: crosshair; }
+.grafico-legenda { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin: 0 0 0.5rem; font-size: 0.86rem; color: var(--texto-2); }
+.grafico-legenda li { display: inline-flex; align-items: center; gap: 0.45rem; }
+.grafico-legenda i, .grafico-tip dt i { display: inline-block; width: 18px; height: 2px; border-radius: 2px; }
+.grafico-tip {
+  position: absolute; z-index: 5; pointer-events: none; min-width: 230px;
+  background: var(--superficie); color: var(--texto); border: 1px solid var(--borda); border-radius: 10px;
+  box-shadow: var(--sombra); padding: 0.6rem 0.8rem; font-size: 0.86rem;
+}
+.grafico-tip-mes { font-family: var(--mono); color: var(--texto-2); margin-bottom: 0.35rem; }
+.grafico-tip dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0.2rem 0.7rem; align-items: center; }
+.grafico-tip dt { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--texto-2); white-space: nowrap; }
+.grafico-tip dd { margin: 0; white-space: nowrap; }
+.grafico-tip strong { font-weight: 800; }
+.grafico-tabela { margin-top: 0.5rem; font-size: 0.86rem; }
+.grafico-tabela summary { cursor: pointer; color: var(--destaque); font-weight: 600; padding: 0.35rem 0; }   /* alvo de toque >= 24px */
+.grafico-tabela .tabela-rolagem { margin-top: 0.5rem; }
+.grafico-tabela caption { text-align: left; color: var(--texto-2); padding: 0.5rem 0.8rem; font-size: 0.8rem; }
 
 /* Linha do tempo */
 .linha { list-style: none; display: grid; gap: 1.5rem; position: relative; }
@@ -192,7 +273,7 @@ ul, ol { margin: 0; padding: 0; }
   margin-left: -1px; background: var(--borda);
 }
 .linha > li:last-child::after { display: none; }
-.quando { color: var(--texto-2); font-size: 0.92rem; font-weight: 600; padding-top: 0.15em; text-align: right; padding-right: 1.75rem; }
+.quando { color: var(--texto-2); font-size: 0.86rem; font-weight: 600; padding-top: 0.2em; text-align: right; padding-right: 1.75rem; }
 .oque { padding-left: 1.5rem; }
 .oque h3 { font-size: 1.15rem; }
 .sep { color: var(--texto-2); font-weight: 400; }
@@ -210,7 +291,11 @@ table { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
 th, td { text-align: left; padding: 0.8rem 1rem; border-bottom: 1px solid var(--borda); vertical-align: top; }
 th { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--texto-2); }
 tbody tr:last-child td { border-bottom: 0; }
-.certificados { margin-top: 1rem; color: var(--texto-2); font-size: 0.95rem; }
+.certificados-lista { list-style: none; display: grid; gap: 0.35rem; }
+.certificados-lista li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid var(--borda); }
+.certificados-lista .quando { text-align: right; padding: 0; }
+.certificados-lista li:last-child { border-bottom: 0; padding-bottom: 0; }
+.nota { margin-top: 0.75rem; font-size: 0.8rem; }
 
 /* Contato */
 .contato { text-align: center; }
@@ -219,8 +304,18 @@ tbody tr:last-child td { border-bottom: 0; }
 /* Rodapé */
 .rodape { border-top: 1px solid var(--borda); padding: 1.5rem 0 2.5rem; color: var(--texto-2); font-size: 0.9rem; }
 .rodape p { margin: 0; }
+.rodape a { display: inline-block; padding: 0.3rem 0; }   /* alvo de toque >= 24px */
+.so-impressao { display: none; }
 
 /* ---------- Responsivo ---------- */
+@media (max-width: 860px) {
+  .sobre { grid-template-columns: 1fr; gap: 1.5rem; }
+  .marcos { display: grid; grid-template-columns: repeat(2, 1fr); border-left: 0; gap: 0.5rem; }
+  .marcos li { padding: 0.25rem 0 0.25rem 1.1rem; }
+  .marcos li::before { left: 0; top: 0.5rem; width: 8px; height: 8px; box-shadow: none; }
+  .tiles { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 640px) {
   body { font-size: 1rem; }
   .nav { min-height: 52px; }
@@ -229,16 +324,79 @@ tbody tr:last-child td { border-bottom: 0; }
   .foto { order: -1; width: 128px; height: 128px; }
   .secao { padding-block: 2.5rem; }
   .destaque-corpo { padding: 1.25rem; }
+  .grafico { padding: 0.75rem 0.75rem 0.5rem; }
+  .grafico-tip { min-width: 190px; }
   .linha > li { grid-template-columns: 1fr; gap: 0.25rem; padding-left: 1.5rem; }
   .linha > li::before { left: 0; margin-left: 0; }
   .linha > li::after { left: 5px; margin-left: 0; }
   .quando { text-align: left; padding-right: 0; }
   .oque { padding-left: 0; }
   .acoes .botao { flex: 1 1 auto; justify-content: center; }
+  .marcos { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .botao, .destaque { transition: none; }
   .botao:hover { transform: none; }
+}
+
+/* ---------- Impressão / currículo em PDF: o mesmo conteúdo, em papel ---------- */
+@media print {
+  :root {
+    --fundo: #FFFFFF; --superficie: #FFFFFF; --superficie-2: #F3F4F6; --borda: #C8CDD3;
+    --texto: #111; --texto-2: #444; --destaque: #0A58CA; --destaque-botao: #0A58CA; --destaque-suave: transparent;
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --grafico-superficie: #FFFFFF;
+    color-scheme: light;
+  }
+  @page { size: A4; margin: 14mm 14mm 16mm; }
+  html { scroll-behavior: auto; }
+  body { font-size: 9.5pt; line-height: 1.35; background: #fff; color: #111; }
+  .container { width: 100%; }
+  .topo, .pular, .acoes, .grafico-tabela, .grafico-legenda, .grafico-svg, .grafico-tip, .pendente, .nota, .sr-only,
+  .rodape p:not(.so-impressao), .foto { display: none !important; }
+  .so-impressao { display: block; font-family: var(--mono); font-size: 8.5pt; margin: 0.2rem 0 0.5rem; }
+  #contato, .kicker, .rodape { display: none !important; }   /* no papel o contato está no cabeçalho */
+  .js .reveal { opacity: 1; transform: none; }
+  .hero-fundo::before { display: none; }
+  .hero { grid-template-columns: 1fr; padding-block: 0 0.8rem; gap: 0; }
+  .hero-texto { max-width: none; }
+  h1 { font-size: 22pt; }
+  h2 { font-size: 14pt; margin-bottom: 0.4rem; }
+  h3 { font-size: 11pt; }
+  .titulo { font-size: 11pt; margin: 0.3rem 0 0.5rem; }
+  .lead { font-size: 10.5pt; margin-bottom: 0.2rem; }
+  .secao { padding-block: 0.55rem; border-top: 1px solid var(--borda); break-inside: auto; }
+  .secao-cab p { display: none; }
+  .secao-cab { margin-bottom: 0.6rem; }
+  .sobre { grid-template-columns: 1fr; gap: 0.5rem; }
+  .marcos { display: none; }
+  .destaque { box-shadow: none; border: 0; }
+  .grafico { display: none; }
+  .destaque-corpo { padding: 0; }
+  .tiles { grid-template-columns: repeat(4, 1fr); gap: 0.4rem; margin: 0.5rem 0; }
+  .tiles li { padding: 0.35rem 0.5rem; }
+  .tiles strong { font-size: 12pt; }
+  .destaque-corpo h3 { font-size: 12pt; }
+  .destaque-corpo .acoes { display: block !important; }
+  .destaque-corpo .acoes .botao { display: inline; border: 0; padding: 0; background: none; color: var(--destaque); font-size: 9pt; margin-right: 1rem; }
+  .destaque-corpo .acoes .botao::after { content: " (github.com/vertonds/isp-analytics)"; color: var(--texto-2); }
+  .destaque-corpo .acoes .botao:not(.primario)::after { content: ""; }
+  .linha { gap: 0.6rem; }
+  .linha > li { grid-template-columns: 110px 1fr; gap: 0.8rem; break-inside: avoid; }
+  .linha > li::before, .linha > li::after { display: none; }
+  .quando { padding: 0; text-align: left; font-size: 8.5pt; }
+  .oque { padding: 0; }
+  .marcas { gap: 0.15rem; }
+  .grupos { display: block; column-count: 3; column-gap: 0.5rem; }      /* multicoluna fragmenta entre páginas; grid não */
+  .grupo { padding: 0.5rem 0.6rem; break-inside: avoid; margin-bottom: 0.5rem; }
+  h2, h3 { break-after: avoid; }
+  .tags li { padding: 0.05rem 0.4rem; font-size: 8pt; border-color: var(--borda); }
+  .tabela-rolagem { border: 0; }
+  th, td { padding: 0.3rem 0.5rem; font-size: 9.5pt; }
+  .certificados-lista li { padding: 0.2rem 0; font-size: 9.5pt; }
+  .contato { text-align: left; break-inside: avoid; }
+  .contato h2 { font-size: 12pt; }
+  .contato p { margin: 0; max-width: none; }
+  a { color: var(--destaque); text-decoration: none; }
 }
