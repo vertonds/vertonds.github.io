@@ -5,6 +5,9 @@
 (function () {
   "use strict";
   document.documentElement.classList.add("js");
+  var tema = new URLSearchParams(location.search).get("tema");   // ?tema=escuro ou ?tema=claro força o modo
+  if (tema === "escuro") document.documentElement.setAttribute("data-theme", "dark");
+  if (tema === "claro") document.documentElement.setAttribute("data-theme", "light");
 
   /* ---------- 1. Entrada suave ---------- */
   var menosMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -196,4 +199,98 @@
   var legendaFig = fig.querySelector("figcaption");
   if (legendaFig) fig.insertBefore(det, legendaFig); else fig.appendChild(det);
   fig.classList.add("grafico-vivo");
+})();
+
+
+/* ==========================================================================
+   v3 "Placar": botão de tema e easter eggs
+   Regras: nada atrapalha a navegação, nada toca som, nada usa marca de terceiros, tudo respeita
+   prefers-reduced-motion, atalhos não disparam enquanto a pessoa digita num campo de texto.
+   ========================================================================== */
+(function () {
+  "use strict";
+  var raiz = document.documentElement;
+  function digitando(ev) {
+    var t = ev.target;
+    return !!(t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable));
+  }
+
+  /* ---------- Tema: botão na navegação; preferência guardada só neste navegador (localStorage, opcional) ---------- */
+  var botao = document.querySelector(".tema-botao");
+  function temaAtual() {
+    return raiz.getAttribute("data-theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  }
+  function aplicar(t, guardar) {
+    raiz.setAttribute("data-theme", t);
+    if (botao) botao.setAttribute("aria-pressed", t === "dark" ? "true" : "false");
+    if (guardar) { try { localStorage.setItem("tema", t); } catch (e) { /* sem armazenamento: só nesta visita */ } }
+  }
+  if (!raiz.hasAttribute("data-theme")) {
+    try { var guardado = localStorage.getItem("tema"); if (guardado === "dark" || guardado === "light") aplicar(guardado, false); } catch (e) {}
+  }
+  if (botao) {
+    botao.setAttribute("aria-pressed", temaAtual() === "dark" ? "true" : "false");
+    botao.addEventListener("click", function () { aplicar(temaAtual() === "dark" ? "light" : "dark", true); });
+  }
+
+  /* ---------- Easter egg 2: console ---------- */
+  var arte = [
+    " _______     _______ ____ _____ ___  _   _ ",
+    "| ____\\ \\   / / ____|  _ \\_   _/ _ \\| \\ | |",
+    "|  _|  \\ \\ / /|  _| | |_) || || | | |  \\| |",
+    "| |___  \\ V / | |___|  _ < | || |_| | |\\  |",
+    "|_____|  \\_/  |_____|_| \\_\\|_| \\___/|_| \\_|",
+    "                                  V I E I R A"
+  ];
+  try {
+    console.log("%c" + arte.join("\n"), "font-family: monospace; color: #7A4FB5; font-weight: bold");
+    console.log("Se você chegou até aqui, a gente vai se dar bem. Vamos conversar?\nhttps://www.linkedin.com/in/everton-vieira-872673228/");
+  } catch (e) {}
+
+  /* ---------- Easter egg 1 (↑↑↓↓←→←→BA → modo 16 bits) e 3 (digitar "sql") ---------- */
+  var konami = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+  var posK = 0, letras = "";
+  var dialogo = document.getElementById("consulta-sql");
+  function aviso(texto) {
+    var a = document.createElement("div"); a.className = "aviso"; a.setAttribute("role", "status"); a.textContent = texto;
+    document.body.appendChild(a);
+    setTimeout(function () { if (a.parentNode) a.parentNode.removeChild(a); }, 4500);
+  }
+  function modo16() {
+    if (raiz.classList.contains("modo-16bits")) return;
+    var ligar = function () { raiz.classList.add("modo-16bits"); aviso("Modo 16 bits ativado. Recarregue a página para voltar."); };
+    if (window.FontFace && document.fonts) {
+      var fonte = new FontFace("Press Start 2P", "url(/fonts/PressStart2P.woff)");
+      fonte.load().then(function (f) { document.fonts.add(f); ligar(); }, ligar);
+    } else { ligar(); }
+  }
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape" && dialogo && dialogo.open) { dialogo.close(); return; }   // Esc fecha a janela (além do padrão do navegador)
+    if (digitando(ev) || ev.ctrlKey || ev.altKey || ev.metaKey) return;
+    var k = ev.key.length === 1 ? ev.key.toLowerCase() : ev.key;
+    posK = (k === konami[posK]) ? posK + 1 : (k === konami[0] ? 1 : 0);
+    if (posK === konami.length) { posK = 0; modo16(); }
+    if (ev.key.length === 1) {
+      letras = (letras + k).slice(-3);
+      if (letras === "sql" && dialogo && typeof dialogo.showModal === "function" && !dialogo.open) { letras = ""; dialogo.showModal(); }
+    }
+  });
+  if (dialogo) {
+    dialogo.addEventListener("click", function (ev) { if (ev.target === dialogo) dialogo.close(); });   // clique fora fecha; Esc é nativo
+    var fechar = dialogo.querySelector(".consulta-fechar");
+    if (fechar) fechar.addEventListener("click", function () { dialogo.close(); });
+  }
+
+  /* ---------- Easter egg 4: três cliques rápidos no nome = cesta de três ---------- */
+  var marca = document.querySelector(".marca"), cliques = [];
+  if (marca) marca.addEventListener("click", function (ev) {
+    var agora = Date.now();
+    cliques = cliques.filter(function (t) { return agora - t < 700; }); cliques.push(agora);
+    if (cliques.length >= 3) {
+      cliques = []; ev.preventDefault();
+      var s = document.createElement("span"); s.className = "tres-pontos"; s.setAttribute("aria-hidden", "true"); s.textContent = "+3";
+      marca.appendChild(s);
+      setTimeout(function () { if (s.parentNode) s.parentNode.removeChild(s); }, 1200);
+    }
+  });
 })();
